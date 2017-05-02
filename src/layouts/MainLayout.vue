@@ -1,46 +1,64 @@
 <template>
-  <div class="">
-    <b-navbar toggleable type="inverse" variant="success">
-      <b-nav-toggle target="nav_collapse"></b-nav-toggle>
-      <b-link class="navbar-brand" to="#">
-        <span>Vue Starter</span>
-      </b-link>
-      <v-link href="/">Home</v-link>
-      <v-link href="/about">About</v-link>
-    </b-navbar>
-  <div class="container page-height">
-    <slot></slot>
-  </div>
+  <div id="app">
+    <v-app id="example-3" left-fixed-sidebar>
+      <v-toolbar>
+        <v-toolbar-side-icon @click.native.stop="navOpen = !navOpen" />
+        <v-toolbar-logo>Toolbar</v-toolbar-logo>
+      </v-toolbar>
+      <main>
+        <v-sidebar left fixed drawer v-model="navOpen">
+          <v-list>
+            <v-list-item @click="route()">
+              <v-list-tile>
+                <v-link href="/">
+                  <v-list-tile-title >Home</v-list-tile-title>
+                </v-link>
+              </v-list-tile>
+            </v-list-item>
+            <v-list-item>
+              <v-list-tile>
+                <v-link href="/about">
+                  <v-list-tile-title >About</v-list-tile-title>
+                </v-link>
+              </v-list-tile>
+            </v-list-item>
+          </v-list>
+        </v-sidebar>
+        <v-content>
+          <v-container fluid class="main-window">
+            <slot></slot>
+          </v-container>
+        </v-content>
+      </main>
+    </v-app>
+
   </div>
 </template>
 
 <script>
-  import VLink from '../components/VLink.vue'
+  import Vue from 'vue';
+  import VLink from '../components/VLink.vue';
 
   export default {
     components: {
       VLink,
+    },
+    data() {
+      return {
+        navOpen: true
+      };
+    },
+    methods: {
+
     }
-  }
+  };
 </script>
 
 <style lang="scss">
-
-body{
-  color: white;
+.main-window{
+  margin-top: 8px;
+  margin-left: 8px;
+  font-size: 16px;
 }
 
-.padding{
- padding: 8px;
-}
-
-.bg-success{
-  background: #207972 !important;
-}
-.page-height{
-  min-height: 100vh;
-}
-.container {
-  background: #2aa198;
-}
 </style>
