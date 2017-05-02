@@ -64,7 +64,10 @@ module.exports = {
     noInfo: true,
     proxy: {
       "/api": "http://localhost:3000"
-    }
+    },
+    publicPath: '/dist/',
+    contentBase: "public",
+    hot: true,
   },
   performance: {
     hints: false
